@@ -10,3 +10,5 @@
 *.snm
 *.synctex.gz
 
+*.fdb_latexmk
+*.fls
