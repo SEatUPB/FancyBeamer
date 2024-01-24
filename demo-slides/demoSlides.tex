@@ -1,0 +1,371 @@
+\documentclass[
+	aspectratio=169, % default is 43
+	8pt, % font size, default is 11pt
+	%handout, % handout mode without animations, comment out to add animations
+	%nosectionframes, % disable automatic frames at the begin of each section (default: sectiontitleslides in beamer mode and sectionoverviews in handout mode)
+	%sectiontitleslides, % enable an automatic section title slide at the begin of each section
+	%sectionoverviews, % enable an automatic section overview at the begin of each section
+	%uniqueslidenumber, % will uniquely identify pages with overlays by a little suffix
+	darkmode, % switch to dark mode (do not use for presentation with a projector)
+]{beamer}
+\usepackage{../fancybeamer} % use the fancy beamer package
+
+%\usepackage[ngerman]{babel} % use this line for slides in German
+
+%\includeonlyframes{current} % default mechanism of beamer to include only labeled frames, can be used for debugging or drafting
+
+% \AtEndPreamble{\setpaths{{pics/}{../pics/}}} % specify custom paths to your pictures
+
+\title[Short Title]{This is the Long Title} % short title is used for the slide footer but optional
+\subtitle[Short Subtitle]{This is the Long Subtitle} % subtitles are optional at all
+\author[Short Author]{Long Author} % short author title is used for the slide footer but optional
+\date{\today} % use a particular date here if needed
+
+\begin{document}
+
+%\maketitle[] % title page without a picture
+%\maketitle[example-image] % ... with title picture
+\maketitle[example-image][50] % ... with optional parameter to move it upwards
+
+\section{Slide Contents}
+
+\subsection{Lists and Numbered Lists}
+\begin{frame}{\insertsubsection}
+	\begin{mycolumns}
+		Lists can be nested to a depth of three:
+		\begin{itemize}
+			\item Item on the first level
+			\item Another item on the first level
+			\begin{itemize}
+				\item Item on the second level
+				\item Another item on the second level
+			\begin{itemize}
+			\item Item on the third level
+			\item Another item on the third level
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\mynextcolumn
+	Numbered lists can be nested to a depth of three:
+	\begin{enumerate}
+		\item Item on the first level
+		\item Another item on the first level
+		\begin{enumerate}
+			\item Item on the second level
+			\item Another item on the second level
+				\begin{enumerate}
+					\item Item on the third level
+					\item Another item on the third level
+				\end{enumerate}
+			\end{enumerate}
+		\end{enumerate}
+	\end{mycolumns}
+\end{frame}
+
+\subsection{Colored Boxes}
+\begin{frame}{\insertsubsection}
+	Normal versions:
+	\begin{mycolumns}[columns=3]
+		\begin{definition}{A Definition}
+			This is a definition.
+		\end{definition}
+	\mynextcolumn
+		\begin{example}{An Example}
+			This is an example.
+		\end{example}
+	\mynextcolumn
+		\begin{note}{A Note}
+			This is a note.
+		\end{note}
+	\end{mycolumns}
+	\vfill
+	Versions without captions:
+	\begin{mycolumns}[columns=3]
+		\begin{definition}{}
+			This is a definition.
+		\end{definition}
+	\mynextcolumn
+		\begin{example}{}
+			This is an example.
+		\end{example}
+	\mynextcolumn
+		\begin{note}{}
+			This is a note.
+		\end{note}
+	\end{mycolumns}
+	\vfill
+	Tight versions with white background (e.g., for use with pictures):
+	\begin{mycolumns}[columns=3]
+		\begin{definitiontight}{A Definition}
+			\centering\includegraphics[width=.75\linewidth]{example-image}
+		\end{definitiontight}
+	\mynextcolumn
+		\begin{exampletight}{An Example}
+			\centering\includegraphics[width=.75\linewidth]{example-image}
+		\end{exampletight}
+	\mynextcolumn
+		\begin{notetight}{A Note}
+			\centering\includegraphics[width=.75\linewidth]{example-image}
+		\end{notetight}
+	\end{mycolumns}
+\end{frame}
+
+{\MakeNewBox{amazing}{purple}
+\begin{frame}{Create New and Modify Existing Boxes}
+	\begin{mycolumns}
+		\begin{amazing}{An Amazing Box}
+			You can create new boxes with \texttt{\textbackslash MakeNewBox\{name\}\{color\}} (which will check if any of the new box commands is already taken) or \texttt{\textbackslash DeclareBox\{name\}\{color\}} (which may overwrite existing commands). This box was created by \texttt{\textbackslash MakeNewBox\{amazing\}\{purple\}}.
+		\end{amazing}
+	\mynextcolumn
+		{\UpdateBoxColor{definition}{teal}
+		\begin{definition}{This is a Definition}
+			With \texttt{\textbackslash UpdateBoxColor\{name\}\{color\}} you can change the color of a box (locally to the current group). This definition was changed with \texttt{\textbackslash UpdateBoxColor\{definition\}\{teal\}}.
+		\end{definition}}
+		\bigskip
+		\begin{definition}{Another Definition}
+			This definition appears outside of the group, so \texttt{\textbackslash UpdateBoxColor\{definition\}\{teal\}} is no longer active.
+		\end{definition}
+	\end{mycolumns}
+\end{frame}
+}
+
+{\MakeNewBox[Improved-Box: ]{improved}{purple}[\hfill Jeah! \boxnumber]
+\begin{frame}{Counting Boxes!}
+	\UpdateBoxPrefix{definition}{Definition~\boxnumber: }%
+	\begin{definition}{Hey Look At My Number!}
+		With \texttt{\textbackslash UpdateBoxPrefix\{name\}\{prefix\}} you can change text to appear before the title of a box (locally to the current group). The macro \texttt{\textbackslash boxnumber} refers to the number of the current box that is robust against beamer overlays (but you do not have to use it).\medskip
+
+		This box was updated with \texttt{\textbackslash UpdateBoxPrefix\{definition\}\{Definition~\textbackslash boxnumber: \}}.
+		Similarly, there is \texttt{\textbackslash UpdateBoxSuffix\{name\}\{suffix\}} for text to appear after the title. As a comfort macro, there is \texttt{\textbackslash UpdateBoxSurround\{name\}\{prefix\}\{suffix\}}.
+	\end{definition}
+	\bigskip
+	\onslide<2->{\begin{improved}{This can be done at construction!}
+		Both \texttt{\textbackslash MakeNewBox[prefix]\{name\}\{color\}[postfix]} and \texttt{\textbackslash DeclareBox[prefix]\{name\}\{color\}[postfix]} have optional arguments that allow to set the prefix and suffix at construction. This box was created with \texttt{\textbackslash MakeNewBox[Improved-Box: ]\{improved\}\{purple\}[\textbackslash hfill Jeah! \textbackslash boxnumber]}.
+	\end{improved}}%
+\end{frame}
+}
+
+\subsection{Adding Links to Pictures Automatically}
+\begin{frame}{\insertsubsection}
+	Using the command \texttt{\textbackslash pic\{filename\}} a picture can be included. In order to automatically add a (source) link to the picture, the link simply has to be stored in a txt-file with the same filename:
+
+	\centering\pic[width=0.5\textwidth]{example-image} % omit file extension of the image picture
+\end{frame}
+
+\subsection{Automatic Dark-Mode for Pictures}
+\begin{frame}{\insertsubsection}
+	\begin{mycolumns}
+		\begin{notetight}{Normal Image with \texttt{\textbackslash pic}}
+			\centering
+			\pic[width=.7\textwidth]{example-image}
+		\end{notetight}
+	\mynextcolumn
+		\begin{notetight}{Inverted Image with \texttt{\textbackslash picDark} (in dark-mode only)}
+			\centering
+			\picDark[width=.7\textwidth]{example-image.jpg} % does only work for bitmap images so far
+		\end{notetight}
+	\end{mycolumns}
+	\begin{note}{Explanation}
+		Using \texttt{\textbackslash picDark} instead of \texttt{\textbackslash pic}, the dark version of an image that is saved as \texttt{<image-name>-dark} automatically gets used when dark-mode is enabled.
+		
+		Images can also automatically be inverted if there is no separate dark version. Therefore, white gets converted to a dark gray that matches the dark background color of the slides.
+	\end{note}
+\end{frame}
+
+\section{Slide Layouts}
+
+\subsection{Multiple Columns}
+\begin{frame}{\insertsubsection}
+	\begin{mycolumns}[columns=4] % default: 2 columns
+		This is an example text that is shown in the \textbf{first column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{second column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{third column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{last column}.
+	\end{mycolumns}
+	\vfill
+	\begin{note}{Explanation}
+		Columns are separated by the command \texttt{\textbackslash mynextcolumn}.
+
+		The option \texttt{columns} specifies the number of columns that should be generated. The default number of columns is two.
+	\end{note}
+\end{frame}
+
+\subsection{Columns with Custom Width}
+\begin{frame}{\insertsubsection}
+	\begin{mycolumns}[columns=3,widths={20,30}]
+		\begin{example}{}
+			The \textbf{first column} takes 20\,\% of the width of the slide.
+		\end{example}
+	\mynextcolumn
+		\begin{example}{}
+			The \textbf{second column} takes 30\,\% of the width of the slide.
+		\end{example}
+	\mynextcolumn
+		\begin{example}{}
+			The \textbf{third column} takes the remaining 50\,\% of the width of the slide.
+		\end{example}
+	\end{mycolumns}
+	\vfill
+	\begin{note}{Explanation}
+		The widths of the single columns can also be manually specified by a list of percentages given to the option \texttt{widths}.
+
+		All columns whose width is not specified are equally split over the remaining space.
+	\end{note}
+\end{frame}
+
+\subsection{Columns with Custom Height}
+\begin{frame}{\insertsubsection}
+	\begin{mycolumns}[height=6cm]
+		\begin{example}{}
+			This is the content of the first column.
+		\end{example}
+		\begin{note}{Explanation}
+			If the content of a column exceeds a certain height, the common centering of all columns will not work anymore because beamer does not define the height of a slide. In this case, you can set the height of the columns manually by adding the option \texttt{height=<height>}.
+		\end{note}
+	\mynextcolumn
+		\begin{example}{}
+			This is the content of the second column. It is too high and would make the first column move downwards without additional options.
+			\vspace{80mm}
+		\end{example}
+	\end{mycolumns}
+\end{frame}
+
+\subsection{Nested Columns}
+\begin{frame}{\insertsubsection}
+	\begin{mycolumns}[T]
+		\begin{example}{}
+			This is the content of the first column.
+		\end{example}
+		\begin{mycolumns}[columns=4]
+			\mynote{}{1.1}
+			\mynextcolumn
+			\mynote{}{1.2}
+			\mynextcolumn
+			\mynote{}{1.3}
+			\mynextcolumn
+			\mynote{}{1.4}
+		\end{mycolumns}
+	\mynextcolumn
+		\begin{example}{}
+			A column on the right side
+		\end{example}
+		\begin{mycolumns}[T]
+			\mynote{}{2.1}
+			\begin{mycolumns}[columns=3]
+				\mynote{}{2.1.1}
+				\mynextcolumn
+				\mynote{}{2.1.2}
+				\mynextcolumn
+				\mynote{}{2.1.3}
+			\end{mycolumns}
+			\mynextcolumn
+			\mynote{}{2.2}
+		\end{mycolumns}
+	\end{mycolumns}
+\end{frame}
+
+\subsection{Column Animations}
+\begin{frame}{\insertsubsection\ -- Option keep}
+	\begin{mycolumns}[columns=3,keep] % short for animation=keep
+		This is an example text that is shown in the \textbf{first column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{second column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{third column}.
+	\end{mycolumns}
+	\vfill
+	\begin{note}{Explanation}
+		The option \texttt{keep} (short for \texttt{animation=keep}) introduces an animation which lets the columns appear one after another.
+
+		The previous columns are kept on the slide when a new column is displayed.
+
+		Animations are ignored in handout mode.
+	\end{note}
+\end{frame}
+
+\begin{frame}{\insertsubsection\ -- Option forget}
+	\begin{mycolumns}[columns=3,forget] % short for animation=forget
+		This is an example text that is shown in the \textbf{first column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{second column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{third column}.
+	\end{mycolumns}
+	\vfill
+	\begin{note}{Explanation}
+		The option \texttt{forget} (short for \texttt{animation=forget}) introduces an animation which lets the columns appear one after another.
+
+		The previous columns are removed when a new column is displayed.
+
+		Animations are ignored in handout mode.
+	\end{note}
+\end{frame}
+
+\begin{frame}{\insertsubsection\ -- Option animation=none}
+	\begin{mycolumns}[columns=3,animation=none]
+		This is an example text that is shown in the \textbf{first column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{second column}.
+	\mynextcolumn
+		This is an example text that is shown in the \textbf{third column}.
+	\end{mycolumns}
+	\vfill
+	\begin{note}{Explanation}
+		The option \texttt{animation=none} deactivates the animation of the columns.
+
+		In the template, this is the default. However, you can overwrite the defaults to animate all slides easily (see \texttt{setmycolumnsdefault} in the source code). Then, it might be necessary to deactivate those animations for some slides.
+	\end{note}
+\end{frame}
+
+\begin{frame}[label=current]{\insertsubsection\ -- Option reverse}
+	\begin{mycolumns}[columns=4,forget,reverse,b]
+		\pic[width=\linewidth]{example-image}\\[0mm]~
+	\mynextcolumn
+		\pic[width=\linewidth]{example-image}\\[5mm]~
+	\mynextcolumn
+		\pic[width=\linewidth]{example-image}\\[10mm]~
+	\mynextcolumn
+		\pic[width=\linewidth]{example-image}\\[15mm]~
+	\end{mycolumns}
+	\begin{note}{Explanation}
+		The option \texttt{reverse} inverts the order of any animation that is specified (i.e., using \texttt{keep} or \texttt{forget}).
+	\end{note}
+\end{frame}
+
+\section{Other Features}
+
+\subsection{Auto-Scaling for Long Titles}
+\begin{frame}{\insertsubsection\ -- Long Titles are Scaled Down to the Available Space}
+	\begin{note}{Explanation}
+		Very long frame titles are scaled down automatically.
+
+		\hfill\hfill\hfill This can avoid annoying linebreaks for a single character or word.\hfill~
+
+		\hfill Use with care.
+	\end{note}
+\end{frame}
+
+\subsection{Easy Navigation in Slides}
+\begin{frame}{\insertsubsection}
+	\vfill
+	Click on the title (here \textbf{\insertshorttitle}) or subtitle (here \textbf{\insertshortsubtitle}) in the slide footer to jump to the title slide.
+	\vfill
+	Click on the section title (here \textbf{\insertsection}) in the slide footer to jump to the section overview.
+	\vfill
+	In the section overview, click on sections or subsections to jump to another part.
+	\vfill
+\end{frame}
+
+\subsection{Repeating the Last Title Slide}
+ % can be used as the last slide of your talk
+\againtitle
+
+\subsection{Content Overview}
+% helpful to navigate to specific content, no need to show during the talk
+%\contentoverview % create a content overview with one column
+\contentoverview[3] % create a content overview with three columns
+
+\end{document}
