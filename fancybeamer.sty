@@ -122,14 +122,14 @@
     \@for\@image:={#2}\do{%
         \iffancy@logos@first@\fancy@logos@first@false\else\hskip0pt plus 1filll\fi
         \ifthenelse{\equal{\@image}{}}{}{%
-            \includegraphics[height=4.5ex,#1]{\@image}%
+            \pic[height=4.5ex,#1]{\@image}%
         }%
     }%
 }}
 
 \newcommand{\@createtitleslide}{
     {
-    \ifx \fancytitlepicture \empty \else \usebackgroundtemplate{\includegraphics[trim=0 0 0 \fancytitlepictureoffset,clip,width=\paperwidth]{\fancytitlepicture}} \fi
+    \ifx \fancytitlepicture \empty \else \usebackgroundtemplate{\pic[trim=0 0 0 \fancytitlepictureoffset,clip,width=\paperwidth]{\fancytitlepicture}} \fi
     \begin{frame}[plain]
         \vskip0pt plus 1filll
         \begin{beamercolorbox}[wd=\paperwidth,ht=4.5ex,dp=2ex,right]{titlebox}
