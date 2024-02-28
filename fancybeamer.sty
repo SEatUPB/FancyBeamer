@@ -373,7 +373,7 @@
 \newdimen\fancy@cols@height      % holds the target height of the columns environment (negative for auto)
 
 \def\fancy@cols@widths@max{100}  % the maximum number to be used for widths
-% with this, we define the keys that are usable within the optional argument of '\mycolumns'
+% with this, we define the keys that are usable within the optional argument of '\fancycolumns'
 
 \def\@fancy@animation@none{\fancy@cols@animation{0}{-}}
 \def\@fancy@animation@keep{\fancy@cols@animation{1}{-}}
@@ -430,7 +430,7 @@
 }
 
 % allows to user to overwrite the defaults
-\newcommand\setmycolumnsdefault[1]{\pgfqkeys{/fancy columns}{@defaults/.append style={#1}}}
+\newcommand\setfancycolumnsdefault[1]{\pgfqkeys{/fancy columns}{@defaults/.append style={#1}}}
 
 % we need two counters
 % 'fancy@cols@current' holds the column we are currently in (starts with 0)
@@ -544,7 +544,7 @@
     \fi
 }
 
-% this is the macro, that will become '\mynextcolumn' within the 'mycolumns' environment
+% this is the macro, that will become '\mynextcolumn' within the 'fancycolumns' environment
 \newcommand\fancy@mynextcolumn{%
     % issue a warning if too many columns
     \ifnum\value{fancy@cols@current}<\fancy@cols@count\else
@@ -581,7 +581,7 @@
 }
 
 % #1: arguments like 'columns=3, keep, reverse'
-\newenvironment{mycolumns}[1][]{\begingroup
+\newenvironment{fancycolumns}[1][]{\begingroup
 \pgfqkeys{/fancy columns}{@defaults, #1}%
 \edef\fancy@previous@fancy@cols{\thefancy@cols@current}% store the current column counter
 \ifdim\fancy@cols@height<0pt\begin{minipage}{\fancy@cols@target@width}\else\begin{minipage}[\fancy@cols@valign][\fancy@cols@height]{\fancy@cols@target@width}\fi%
