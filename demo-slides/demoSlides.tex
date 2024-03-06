@@ -49,7 +49,7 @@
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
-	\mynextcolumn
+	\nextcolumn
 	Numbered lists can be nested to a depth of three:
 	\begin{enumerate}
 		\item Item on the first level
@@ -73,11 +73,11 @@
 		\begin{definition}{A Definition}
 			This is a definition.
 		\end{definition}
-	\mynextcolumn
+	\nextcolumn
 		\begin{example}{An {\color{blue} Example}}
 			This is an example.
 		\end{example}
-	\mynextcolumn
+	\nextcolumn
 		\begin{note}{A {\color{red} Note}}
 			This is a note.
 		\end{note}
@@ -88,11 +88,11 @@
 		\begin{definition}{}
 			This is a {\color{orange} definition}.
 		\end{definition}
-	\mynextcolumn
+	\nextcolumn
 		\begin{example}{}
 			This is an {\color{blue} example}.
 		\end{example}
-	\mynextcolumn
+	\nextcolumn
 		\begin{note}{}
 			This is a {\color{red} note}.
 		\end{note}
@@ -103,11 +103,11 @@
 		\begin{definitiontight}{A Definition}
 			\centering\includegraphics[width=.75\linewidth]{example-image}
 		\end{definitiontight}
-	\mynextcolumn
+	\nextcolumn
 		\begin{exampletight}{An Example}
 			\centering\includegraphics[width=.75\linewidth]{example-image}
 		\end{exampletight}
-	\mynextcolumn
+	\nextcolumn
 		\begin{notetight}{A Note}
 			\centering\includegraphics[width=.75\linewidth]{example-image}
 		\end{notetight}
@@ -120,7 +120,7 @@
 		\begin{amazing}{An Amazing Box}
 			You can create new boxes with \texttt{\textbackslash MakeNewBox\{name\}\{color\}} (which will check if any of the new box commands is already taken) or \texttt{\textbackslash DeclareBox\{name\}\{color\}} (which may overwrite existing commands). This box was created by \texttt{\textbackslash MakeNewBox\{amazing\}\{purple\}}.
 		\end{amazing}
-	\mynextcolumn
+	\nextcolumn
 		{\UpdateBoxColor{definition}{teal}
 		\begin{definition}{This is a Definition}
 			With \texttt{\textbackslash UpdateBoxColor\{name\}\{color\}} you can change the color of a box (locally to the current group). This definition was changed with \texttt{\textbackslash UpdateBoxColor\{definition\}\{teal\}}.
@@ -163,7 +163,7 @@
 			\centering
 			\pic[width=.7\textwidth]{example-image}
 		\end{notetight}
-	\mynextcolumn
+	\nextcolumn
 		\begin{notetight}{Inverted Image with \texttt{\textbackslash picDark} (in dark-mode only)}
 			\centering
 			\picDark[width=.7\textwidth]{example-image.jpg} % does only work for bitmap images so far
@@ -182,16 +182,16 @@
 \begin{frame}{\insertsubsection}
 	\begin{fancycolumns}[columns=4] % default: 2 columns
 		This is an example text that is shown in the \textbf{first column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{second column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{third column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{last column}.
 	\end{fancycolumns}
 	\vfill
 	\begin{note}{Explanation}
-		Columns are separated by the command \texttt{\textbackslash mynextcolumn}.
+		Columns are separated by the command \texttt{\textbackslash nextcolumn}.
 
 		The option \texttt{columns} specifies the number of columns that should be generated. The default number of columns is two.
 	\end{note}
@@ -203,11 +203,11 @@
 		\begin{example}{}
 			The \textbf{first column} takes 20\,\% of the width of the slide.
 		\end{example}
-	\mynextcolumn
+	\nextcolumn
 		\begin{example}{}
 			The \textbf{second column} takes 30\,\% of the width of the slide.
 		\end{example}
-	\mynextcolumn
+	\nextcolumn
 		\begin{example}{}
 			The \textbf{third column} takes the remaining 50\,\% of the width of the slide.
 		\end{example}
@@ -229,7 +229,7 @@
 		\begin{note}{Explanation}
 			If the content of a column exceeds a certain height, the common centering of all columns will not work anymore because beamer does not define the height of a slide. In this case, you can set the height of the columns manually by adding the option \texttt{height=<height>}.
 		\end{note}
-	\mynextcolumn
+	\nextcolumn
 		\begin{example}{}
 			This is the content of the second column. It is too high and would make the first column move downwards without additional options.
 			\vspace{80mm}
@@ -245,14 +245,14 @@
 		\end{example}
 		\begin{fancycolumns}[columns=4]
 			\mynote{}{1.1}
-			\mynextcolumn
+			\nextcolumn
 			\mynote{}{1.2}
-			\mynextcolumn
+			\nextcolumn
 			\mynote{}{1.3}
-			\mynextcolumn
+			\nextcolumn
 			\mynote{}{1.4}
 		\end{fancycolumns}
-	\mynextcolumn
+	\nextcolumn
 		\begin{example}{}
 			A column on the right side
 		\end{example}
@@ -260,12 +260,12 @@
 			\mynote{}{2.1}
 			\begin{fancycolumns}[columns=3]
 				\mynote{}{2.1.1}
-				\mynextcolumn
+				\nextcolumn
 				\mynote{}{2.1.2}
-				\mynextcolumn
+				\nextcolumn
 				\mynote{}{2.1.3}
 			\end{fancycolumns}
-			\mynextcolumn
+			\nextcolumn
 			\mynote{}{2.2}
 		\end{fancycolumns}
 	\end{fancycolumns}
@@ -275,9 +275,9 @@
 \begin{frame}{\insertsubsection\ -- Option keep}
 	\begin{fancycolumns}[columns=3,keep] % short for animation=keep
 		This is an example text that is shown in the \textbf{first column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{second column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{third column}.
 	\end{fancycolumns}
 	\vfill
@@ -293,9 +293,9 @@
 \begin{frame}{\insertsubsection\ -- Option forget}
 	\begin{fancycolumns}[columns=3,forget] % short for animation=forget
 		This is an example text that is shown in the \textbf{first column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{second column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{third column}.
 	\end{fancycolumns}
 	\vfill
@@ -311,9 +311,9 @@
 \begin{frame}{\insertsubsection\ -- Option animation=none}
 	\begin{fancycolumns}[columns=3,animation=none]
 		This is an example text that is shown in the \textbf{first column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{second column}.
-	\mynextcolumn
+	\nextcolumn
 		This is an example text that is shown in the \textbf{third column}.
 	\end{fancycolumns}
 	\vfill
@@ -327,11 +327,11 @@
 \begin{frame}[label=current]{\insertsubsection\ -- Option reverse}
 	\begin{fancycolumns}[columns=4,forget,reverse,b]
 		\pic[width=\linewidth]{example-image}\\[0mm]~
-	\mynextcolumn
+	\nextcolumn
 		\pic[width=\linewidth]{example-image}\\[5mm]~
-	\mynextcolumn
+	\nextcolumn
 		\pic[width=\linewidth]{example-image}\\[10mm]~
-	\mynextcolumn
+	\nextcolumn
 		\pic[width=\linewidth]{example-image}\\[15mm]~
 	\end{fancycolumns}
 	\begin{note}{Explanation}

@@ -452,13 +452,13 @@
     % due to the way beamer calculates the columns, we remove the margin from the width
     % see etoolbox for an explanation of '\dimdef' (basically allows for calculations with dimensions)
     \dimdef{\fancy@cols@total@width}{\linewidth-\fancy@cols@margin*\fancy@cols@count+\fancy@cols@margin}%
-    % activate(/overwrite) the '\mynextcolumn' macro within the environment
-    \let\mynextcolumn\fancy@mynextcolumn
+    % activate(/overwrite) the '\nextcolumn' macro within the environment
+    \let\nextcolumn\fancy@nextcolumn
     % a rather complicated macro, which sets/calculates the widths for all columns
     \fancy@cols@initialize@widths
     % issue the first column
     % NOTE: we don't guard if 'columns' is below 1 (e.g. we always assume, there is 1 column)
-    \mynextcolumn
+    \nextcolumn
 }
 
 % a temporary counter so we do not need to use low-level tex counters (like @tempcnta)
@@ -544,8 +544,8 @@
     \fi
 }
 
-% this is the macro, that will become '\mynextcolumn' within the 'fancycolumns' environment
-\newcommand\fancy@mynextcolumn{%
+% this is the macro, that will become '\nextcolumn' within the 'fancycolumns' environment
+\newcommand\fancy@nextcolumn{%
     % issue a warning if too many columns
     \ifnum\value{fancy@cols@current}<\fancy@cols@count\else
         % this mus be an error, we calculate widths etc. only for the given columns
