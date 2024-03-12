@@ -142,7 +142,9 @@
         \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{subtitlebox}
             \small
             \ifx \insertsubtitle \empty \else \insertsubtitle\ $\vert$ \fi
-            \ifx \insertauthor \empty \else \insertauthor\ $\vert$ \fi
+            \makeatletter
+            \ifx \beamer@shortauthor \empty \else \insertauthor\ $\vert$ \fi
+            \makeatother
             \ifx \insertdate \empty \else \insertdate \fi
             \hspace*{20pt}
         \end{beamercolorbox}%
