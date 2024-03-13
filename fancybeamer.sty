@@ -143,8 +143,10 @@
         \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=\fancy@titlepage@margin]{subtitlebox}
             \small
             \ifx \insertsubtitle \empty \else \insertsubtitle\ $\vert$ \fi
-            \insertauthor\
-            \ifx \insertdate \empty \else $\vert$ \insertdate \fi
+            \makeatletter
+            \ifx \beamer@shortauthor \empty \else \insertauthor\ $\vert$ \fi
+            \makeatother
+            \ifx \insertdate \empty \else \insertdate \fi
         \end{beamercolorbox}%
         \nointerlineskip
         \begin{beamercolorbox}[wd=\paperwidth,ht=4.5ex,dp=2ex,leftskip=\fancy@titlepage@margin,rightskip=\fancy@titlepage@margin]{logobox}
