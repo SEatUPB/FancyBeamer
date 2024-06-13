@@ -23,14 +23,12 @@
 \newif\ifsectiontitleslide % for enabling the automatic section title slide at the begin of each section
 \newif\ifsectionoverview % for enabling the automatic section overview on the section title slide
 \newif\ifdarkmode
-\newif\iftransparenttitle % for enabling the transparency of the footer on the title slide
 
 \DeclareOption{nosectionframes}{\sectiontitleslidefalse \sectionoverviewfalse}
 \DeclareOption{sectiontitleslides}{\sectiontitleslidetrue \sectionoverviewfalse}
 \DeclareOption{sectionoverviews}{\sectiontitleslidetrue \sectionoverviewtrue}
 \DeclareOption{uniqueslidenumber}{\uniqueslidenumbersuffixtrue}
 \DeclareOption{darkmode}{\darkmodetrue}
-\DeclareOption{transparenttitle}{\transparenttitletrue}
 
 \ExecuteOptions{sectiontitleslides} % use sectiontitleslides as default
 \mode<handout>{\ExecuteOptions{sectionoverviews}} % use sectionoverviews as default in handout mode
@@ -117,6 +115,9 @@
 % frame layout
 % ---------------------------------------------
 
+\def\fancy@titlefooter@transparency{1}
+\def\settitlefootertransparency#1{\def\fancy@titlefooter@transparency{#1}}
+
 % we use this flag as a helper to toggle extra behavior when constructing the logos
 \newif\iffancy@logos@first@
 
@@ -152,9 +153,9 @@
             \ifx \insertdate \empty \else \insertdate \fi
         \end{beamercolorbox}%
         \nointerlineskip
-        \iftransparenttitle\pgfsetfillopacity{0.72}\fi
+        \ifdim\fancy@titlefooter@transparency\p@=\p@\else\pgfsetfillopacity{\fancy@titlefooter@transparency}\fi
         \begin{beamercolorbox}[wd=\paperwidth,ht=4.5ex,dp=2ex,leftskip=\fancy@titlepage@margin,rightskip=\fancy@titlepage@margin]{logobox}
-            \vspace{-1ex}%
+            \ifdim\fancy@titlefooter@transparency\p@=\p@\else\pgfsetfillopacity{1}\fi\vspace{-1ex}%
             \fancy@logoline
         \end{beamercolorbox}%
     \end{frame}
